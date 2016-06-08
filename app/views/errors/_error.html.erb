@@ -1,0 +1,26 @@
+<%# locals: title, desc %>
+<div class="container-fluid full-width errors">
+	<div class="fixed-width background-white">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="title"><%= title %><br><%= title2 %></h1>
+				<p class="contents"><%= desc %><br><%= desc2 %></p>
+
+				<div class="buttons">
+			    	<%= link_to '이전 페이지', '', class: 'btn-gray' %>
+			    	<%= link_to '메인 홈으로', root_url, class: 'btn-red' %>
+				</div>
+
+				<% if  image == "img_error" %>
+					<%= image_tag "home/img_error.png" %>
+				<% else %>
+					<%= image_tag "home/img_error_address.png" %>
+				<% end %>
+			</div>
+			<div class="col-md-6">
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
