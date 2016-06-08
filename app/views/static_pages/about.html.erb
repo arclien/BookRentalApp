@@ -1,3 +1,47 @@
 <% provide(:title, "About") %>
 <h1>StaticPages#about</h1>
 <p>Find me in app/views/static_pages/about.html.erb</p>
+
+<form id="search">
+  Title:<br>
+  <input type="text" id="title" name="title" value=""><br>
+  <input type="submit" value="Submit">
+</form>
+
+<ul class="list-group" id="list"></ul>
+<script>
+	
+
+	$("#search").submit(function(e) {
+		
+		var url = "https://apis.daum.net/search/book";
+		var title = $(this).find("#title").val() || "코딩클럽";
+		console.log(title);
+		$.ajax({
+          url: url,
+          data: {apikey: "", 
+          		 q: title, 
+          		 output: "json"
+          },
+          dataType : "jsonp",
+	      type : "post",
+	      jsonp : "callback",
+
+          success: function(data){
+            var html = '';
+            $.each( data.channel.item, function(i,item){
+            	console.log(item.title);
+            	html += "<li class='list-group-item'>" + item.title + "</li>";
+            });
+            $("#list").html(html);
+
+          },error :function(xhr,response){
+            console.log("Error code is "+xhr.status+" and the error is "+response);
+          }
+      	});
+
+		e.preventDefault(); // avoid to execute the actual submit of the form.
+  	});
+
+
+</script>
