@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'static_pages#home'
+  root to: 'books#index'
   
   get 'home' => 'static_pages#home'
 
@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       passwords:     'users/passwords'
     }
 
-    
+   
+
+  resources :books
+  resources :rentals
+
   get '*any', via: :all, to: 'errors#not_found'
 end

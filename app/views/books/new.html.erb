@@ -1,7 +1,9 @@
-<% provide(:title, "About") %>
-<h1>StaticPages#about</h1>
-<p>Find me in app/views/static_pages/about.html.erb</p>
+<h2>Create Book</h2>
+<%= render 'form' %>
 
+
+
+<h2> 책 검색 </h2>
 <form id="search">
   Title:<br>
   <input type="text" id="title" name="title" value=""><br>
@@ -32,8 +34,9 @@
           success: function(data){
             var html = '';
             $.each( data.channel.item, function(i,item){
-            	console.log(item.title);
-            	html += "<li class='list-group-item'>" + item.title + "</li>";
+            	console.log( JSON.stringify(item) );
+
+            	html += "<a href='#' onClick='addBookOnList("+JSON.stringify(item)+")'><li class='list-group-item'>" + item.title + "</li></a>";
             });
             $("#list").html(html);
 
@@ -42,8 +45,15 @@
           }
       	});
 
-		e.preventDefault(); // avoid to execute the actual submit of the form.
+		    e.preventDefault(); // avoid to execute the actual submit of the form.
   	});
 
-
+	function addBookOnList(info){
+    document.getElementById('book_title').value = info.title;
+    document.getElementById('book_author').value = info.author_t;
+    document.getElementById('book_year').value = info.pub_date;
+    document.getElementById('book_genre').value = info.category;
+    document.getElementById('book_description').value = info.description;
+		//console.log(info);
+	}
 </script>

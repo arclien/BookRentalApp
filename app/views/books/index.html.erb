@@ -1,0 +1,27 @@
+<h2>Book Listing</h2>
+<table>
+<tr>
+<th>Book</th>
+<th>Author</th>
+<th>Genre</th>
+<th>Description</th>
+</tr>
+
+<% @books.each do |book| %>
+  <tr>
+  <td> <%= link_to book.title, book_path(book) %> </td>
+  <td> <%= book.author %> </td>
+  <td> <%= book.genre %> </td>
+  <td> <%= book.description %> </td>
+  <td> <%= link_to "Edit", edit_book_path(book) %> </td>
+  <td> <%= link_to "Delete", book_path(book), :method => "delete", :confirm => "Are you sure?" %> </td>
+  </tr>
+<% end %>
+</table>
+<p>
+<%= link_to "Add Book", new_book_path %>
+<%= link_to "Rent a Book", new_rental_path %>
+<%= link_to "Customers", edit_user_registration_path %>
+</p>
+
+

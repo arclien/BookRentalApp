@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
-
+=begin
   # error handling
   rescue_from Exception, with: :internal_server_error
   rescue_from ActionController::RoutingError,
@@ -32,5 +32,6 @@ class ApplicationController < ActionController::Base
   rescue ActionController::UnknownFormat
     render status: :internal_server_error, text: 'internal server error'
   end
-  
+=end
+
 end
