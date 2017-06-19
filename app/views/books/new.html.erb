@@ -12,48 +12,59 @@
 
 <ul class="list-group" id="list"></ul>
 <script>
-	
+  
 
-	$("#search").submit(function(e) {
-		
-		var url = "https://apis.daum.net/search/book";
-		var title = $(this).find("#title").val() || "코딩클럽";
-		console.log(title);
-		$.ajax({
+  $("#search").submit(function(e) {
+    
+    var url = "https://apis.daum.net/search/book";
+    var title = $(this).find("#title").val() || "코딩클럽";
+    console.log(title);
+    $.ajax({
           url: url,
           data: {apikey: "eac6131f84cc5fa82ba7bb2612c1607f", 
-          		 q: title, 
-          		 sort: "popular",
-          		 pageno: 1,
-          		 output: "json"
+               q: title, 
+               sort: "popular",
+               pageno: 1,
+               output: "json"
           },
           dataType : "jsonp",
-	      type : "post",
-	      jsonp : "callback",
+        type : "post",
+        jsonp : "callback",
 
           success: function(data){
             var html = '';
             $.each( data.channel.item, function(i,item){
-            	console.log( JSON.stringify(item) );
+              console.log( JSON.stringify(item) );
 
-            	html += "<a href='#' onClick='addBookOnList("+JSON.stringify(item)+")'><li class='list-group-item'>" + item.title + "</li></a>";
+              html += "<li class='list-group-item' data='"+ JSON.stringify(item) +"'>" + item.title + "</li>";
             });
             $("#list").html(html);
+
+            // 새로 렌더한 li tag에 대한 클릭 이벤트 바인딩
+            $(".list-group-item").click( function(e){
+              e.preventDefault();
+              addBookOnList( JSON.parse( $(this).attr('data') ) );
+            });
 
           },error :function(xhr,response){
             console.log("Error code is "+xhr.status+" and the error is "+response);
           }
-      	});
+      });
 
-		    e.preventDefault(); // avoid to execute the actual submit of the form.
-  	});
+      e.preventDefault(); // avoid to execute the actual submit of the form.
 
-	function addBookOnList(info){
+
+  });
+
+  
+  function addBookOnList(info){
+    //console.log(typeof JSON.parse(info)
     document.getElementById('book_title').value = info.title;
-    document.getElementById('book_author').value = info.author_t;
+    document.getElementById('book_author').value = info.author;
     document.getElementById('book_year').value = info.pub_date;
     document.getElementById('book_genre').value = info.category;
-    document.getElementById('book_description').value = info.description;
-		//console.log(info);
-	}
+    //document.getElementById('book_description').value = info.description;
+    $(".fr-element.fr-view").html(info.description);
+    //console.log(info);
+  }
 </script>

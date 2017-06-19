@@ -3,6 +3,6 @@
 <li>Author: <%= @book.author %> </li>
 <li>Release Year: <%= @book.year %> </li>
 <li>Genre: <%= @book.genre %> </li>
-<li>Description: <%= @book.description %> </li>
+<li>Description: <%= @book.description.html_safe %> </li>
 </ul>
 <p><%= link_to "Book Listing", books_path %></p>

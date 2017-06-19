@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.2'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'rails', '4.2.4'
+gem 'pg'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -38,6 +38,17 @@ gem 'devise'
 # bootstrap
 gem 'bootstrap-sass',       '3.2.0.0'
 
+# enable font awesome plugin for html & css
+gem 'font-awesome-rails'
+
+gem "wysiwyg-rails"
+
+# enable slim html preprocessor
+gem 'slim-rails'
+
+# admin gem
+gem 'activeadmin', github: 'activeadmin'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -51,7 +62,7 @@ group :development, :test do
 
 
   gem 'rspec-rails'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
